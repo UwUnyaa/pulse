@@ -26,5 +26,8 @@ interface.o: interface.c interface.h types.h constants.h events.o
 events.o: events.c gpointer-structs.h cpu.h interface.h types.h macros.h
 	$(CC) events.c -o events.o -c $(CFLAGS) $(GTKFLAGS)
 
-pulse: main.c types.h interface.h cpu.h gpointer-structs.h config.h cpu.o interface.o fail.o system.o events.o
-	$(CC) main.c cpu.o interface.o fail.o system.o events.o -o pulse $(CFLAGS) $(GTKFLAGS)
+main.o: main.c types.h interface.h cpu.h gpointer-structs.h config.h
+	$(CC) main.c -o main.o -c $(CFLAGS) $(GTKFLAGS)
+
+pulse: main.o events.o interface.o cpu.o system.o fail.o
+	$(CC) main.o events.o interface.o cpu.o system.o fail.o -o pulse $(CFLAGS) $(GTKFLAGS)
