@@ -43,14 +43,12 @@ gboolean deleteEventHandler (GtkWidget *window,
   return TRUE;
 }
 
-gboolean lockToggle (GtkWidget *button, bool *state) {
+void lockToggle (GtkWidget *button, bool *state) {
   gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON (button),
                                (gboolean) *state);
-
-  return TRUE;
 }
 
-gboolean toggleHandler (GtkWidget *button, struct CPUEnableInfo *data) {
+void toggleHandler (GtkWidget *button, struct CPUEnableInfo *data) {
   bool
     newState = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON (button)),
     result = setCPUEnableState(newState, data->info, data->nthCPU);
@@ -58,8 +56,6 @@ gboolean toggleHandler (GtkWidget *button, struct CPUEnableInfo *data) {
   printf("Setting cpu%u to %s: %s\n", data->nthCPU,
          (newState ? "enabled" : "disabled"),
          (result ? "succeeded" : "failed"));
-
-  return TRUE;
 }
 
 gint updateUsage (struct CPUStatsAndInterface *data) {

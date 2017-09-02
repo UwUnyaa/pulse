@@ -36,8 +36,8 @@ GtkWidget* initInterface (struct CPUInterface*, CPUCount_t);
 
 /* events.c */
 gint updateUsage (gpointer);
-gboolean toggleHandler (GtkWidget*, struct CPUEnableInfo*);
-gboolean lockToggle (GtkWidget*, bool*);
+void toggleHandler (GtkWidget*, struct CPUEnableInfo*);
+void lockToggle (GtkWidget*, bool*);
 gboolean deleteEventHandler (GtkWidget*, GdkEvent*, gpointer);
 
 /* fail.c */
