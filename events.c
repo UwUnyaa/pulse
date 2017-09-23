@@ -61,7 +61,7 @@ void toggleHandler (GtkWidget *button, struct CPUEnableInfo *data) {
 gint updateUsage (struct CPUStatsAndInterface *data) {
   getCPUStats(data->info, data->count);
   for (CPUCount_t i = 0; i < data->count; i += 1) {
-    double usage = getCPUUsage(&data->info[i]);
+    double usage = clamp(getCPUUsage(&data->info[i]), 0.0, 1.0);
     gtk_progress_bar_update(GTK_PROGRESS_BAR (data->interface[i].usageBar),
                             (gdouble) usage);
   }
