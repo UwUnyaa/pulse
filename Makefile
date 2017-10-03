@@ -20,6 +20,8 @@ system.o: system.c
 
 cpu.o: cpu.c cpu.h types.h constants.h
 
+vendor.o: vendor.c vendor.h macros.h
+
 interface.o: interface.c interface.h types.h constants.h events.o
 	$(CC) interface.c -o interface.o -c $(CFLAGS) $(GTKFLAGS)
 

@@ -17,23 +17,17 @@
   pulse. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#define CPUStatFile          "/proc/stat"
-#define CPUSysInfoDirFormat  "/sys/devices/system/cpu/cpu%u"
-#define CPUEnabledFileFormat "/sys/devices/system/cpu/cpu%u/online"
-#define CPUinfoFile          "/proc/cpuinfo"
+#include <stddef.h>
+#include <string.h>
 
-#define MAXCORES             256
+#include "macros.h"
+#include "vendor.h"
 
-struct ProcessorStat {
-  unsigned long user;
-  unsigned long nice;
-  unsigned long system;
-  unsigned long idle;
-};
-
-struct ProcessorInfo {
-  struct ProcessorStat previousStat;
-  struct ProcessorStat currentStat;
-  bool enabled;
-  double usage;
-};
+void normalizeVendorName (char *name, size_t len) {
+  for (size_t i = 0; i < lengthof (vendorNames); i += 1) {
+    if (strcmp(vendorNames[i].cpuid, name) == 0) {
+      strncpy(name, vendorNames[i].name, len);
+      return;
+    }
+  }
+}

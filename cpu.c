@@ -53,6 +53,28 @@ CPUCount_t getCPUCount (void) {
   return count;
 }
 
+int getCpuinfoField (char *field, char *result, size_t len) {
+  FILE *file = fopen("/proc/cpuinfo", "r");
+  if (!file) {
+    return 0;
+  }
+
+  char line[BUFSIZE], fieldName[BUFSIZE], fieldVal[BUFSIZE];
+  int isEof;
+
+  do {
+    fgets(line, sizeof (line), file);
+    sscanf(line, "%4096[^\t]%*[\t: ]%4096[^\n]", fieldName, fieldVal);
+  } while (strcmp(field, fieldName) != 0 || (isEof = feof(file)));
+
+  if (isEof) {
+    return 0;
+  }
+
+  strncpy(result, fieldVal, len);
+  return 1;
+}
+
 bool getCPUEnableState (CPUCount_t nthCPU) {
   if (nthCPU == 0) {     /* cpu 0 can't be disabled */
     return true;
