@@ -43,8 +43,8 @@ GtkWidget* initInterface (struct CPUInterface *interfaces, CPUCount_t CPUCount) 
                      FALSE, FALSE, borderSize);
   gtk_widget_show(imageAlignment);
 
-  /* TODO */
-  gtk_widget_show(window);                             /* test */
+  /* show window first, in order to make it drawable */
+  gtk_widget_show(window);
   /* no clue what I'm doing, but this compiles */
   GtkWidget *image = createBadgeImage(window->window);
   gtk_container_add(GTK_CONTAINER (imageAlignment), image);
