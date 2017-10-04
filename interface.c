@@ -77,7 +77,6 @@ GtkWidget* initInterface (struct CPUInterface *interfaces, CPUCount_t CPUCount) 
   }
 
   gtk_widget_show(CPUsVbox);
-  gtk_widget_show(window);
 
   return window;
 }
