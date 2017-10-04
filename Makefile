@@ -5,7 +5,7 @@ GTKFLAGS   = $$(pkg-config --cflags --libs gtk+-2.0)
 CAIROFLAGS = $$(pkg-config --cflags --libs pangocairo)
 CC         = gcc
 
-TAGS     = etags
+TAGS       = etags
 
 all: pulse
 
