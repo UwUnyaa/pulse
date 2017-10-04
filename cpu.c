@@ -146,13 +146,19 @@ void getCPUStats (struct ProcessorInfo *info, CPUCount_t count) {
       fail("getCPUStats(): fgets() failed");
     }
 
-    sscanf(buf, "%3[^0-9]%u %lu %lu %lu %lu",
+    sscanf(buf, "%3[^0-9]%u %lu %lu %lu %lu %lu %lu %lu %lu %lu %lu",
            firstField,
            &currentCPU,
            &temp.user,
            &temp.nice,
            &temp.system,
-           &temp.idle);
+           &temp.idle,
+           &temp.iowait,
+           &temp.irq,
+           &temp.softirq,
+           &temp.steal,
+           &temp.guest,
+           &temp.guest_nice);
 
     if (strcmp(firstField, "cpu") != 0 || currentCPU >= count) {
       /* all cpu fields were read already */
@@ -178,10 +184,25 @@ double getCPUUsage (struct ProcessorInfo *info) {
       *previous = &info->previousStat;
 
     double work =
-      (current->user  + current->nice  + current->system) -
-      (previous->user + previous->nice + previous->system);
+      (current->user     +
+       current->nice     +
+       current->system   +
+       current->irq      +
+       current->softirq  +
+       current->guest    +
+       current->guest_nice) -
+      (previous->user    +
+       previous->nice    +
+       previous->system  +
+       previous->irq     +
+       previous->softirq +
+       previous->guest   +
+       previous->guest_nice);
 
-    double total = work + (current->idle - previous->idle);
+    double total = work +
+      ((current->idle   - previous->idle)  +
+       (current->steal  - previous->steal) +
+       (current->iowait - current->iowait));
 
     usage = work / total;
   }
@@ -192,10 +213,16 @@ double getCPUUsage (struct ProcessorInfo *info) {
 
 
 void initStat (struct ProcessorStat *stat) {
-  stat->user   = 0;
-  stat->nice   = 0;
-  stat->system = 0;
-  stat->idle   = 0;
+  stat->user       = 0;
+  stat->nice       = 0;
+  stat->system     = 0;
+  stat->idle       = 0;
+  stat->iowait     = 0;
+  stat->irq        = 0;
+  stat->softirq    = 0;
+  stat->steal      = 0;
+  stat->guest      = 0;
+  stat->guest_nice = 0;
 }
 
 void initInfo (struct ProcessorInfo *processor, CPUCount_t nthCPU) {
