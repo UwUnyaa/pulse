@@ -23,6 +23,9 @@
 #include "types.h"
 #include "constants.h"
 
+/* badge.c */
+GtkWidget* createBadgeImage (GdkDrawable*);
+
 GtkWidget* initInterface (struct CPUInterface *interfaces, CPUCount_t CPUCount) {
   /* INTERFACES should be malloc()ed */
   GtkWidget *window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
@@ -41,7 +44,9 @@ GtkWidget* initInterface (struct CPUInterface *interfaces, CPUCount_t CPUCount) 
   gtk_widget_show(imageAlignment);
 
   /* TODO */
-  GtkWidget *image = gtk_image_new_from_file("placeholder.png");
+  gtk_widget_show(window);                             /* test */
+  /* no clue what I'm doing, but this compiles */
+  GtkWidget *image = createBadgeImage(window->window);
   gtk_container_add(GTK_CONTAINER (imageAlignment), image);
   gtk_widget_show(image);
 
