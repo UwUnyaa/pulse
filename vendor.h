@@ -43,5 +43,5 @@ const struct vendorName vendorNames[] = {
   {"Microsoft Hv", "Hyper-V"},
   {" lrpepyh vr",  "Parallels"},
   {"VMwareVMware", "VMware"},
-  {"XenVMMXenVMM", "Xen HVM"}
+  {"XenVMMXenVMM", "Xen HVM"},
 };
