@@ -38,7 +38,6 @@ GtkWidget* initInterface (struct CPUInterface*, CPUCount_t);
 gint updateUsage (gpointer);
 void toggleHandler (GtkWidget*, struct CPUEnableInfo*);
 void lockToggle (GtkWidget*, bool*);
-gboolean deleteEventHandler (GtkWidget*, GdkEvent*, gpointer);
 
 /* fail.c */
 void fail(char*);
@@ -108,8 +107,7 @@ int main (int argc, char *argv[]) {
   }
 
   /* add event handlers */
-  g_signal_connect(window, "delete-event",
-                   G_CALLBACK (deleteEventHandler), 0);
+  g_signal_connect(window, "delete-event", G_CALLBACK (gtk_main_quit), 0);
   g_timeout_add(refreshInterval, updateUsage, &CPUData);
 
   gtk_main();

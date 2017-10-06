@@ -32,17 +32,6 @@ void getCPUStats (struct ProcessorInfo*, CPUCount_t);
 double getCPUUsage (struct ProcessorInfo*);
 bool setCPUEnableState (bool, struct ProcessorInfo*, CPUCount_t);
 
-gboolean deleteEventHandler (GtkWidget *window,
-                             GdkEvent *event,
-                             void *data) {
-  ignore(window);
-  ignore(event);
-  ignore(data);
-
-  gtk_main_quit();
-  return TRUE;
-}
-
 void lockToggle (GtkWidget *button, bool *state) {
   gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON (button),
                                (gboolean) *state);
