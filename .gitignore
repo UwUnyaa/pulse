@@ -2,3 +2,5 @@
 pulse
 *.o
 TAGS
+badge/badgedata.h
+dumpfile
