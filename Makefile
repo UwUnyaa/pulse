@@ -10,12 +10,12 @@ TAGS       = etags
 all: pulse
 
 clean:
-	rm -f *~ *.o TAGS pulse badge/badgedata.h dumpfile
+	rm -f *~ *.o TAGS pulse badge/badgedata.h utils/dumpfile
 
 tags: *.c *.h
 	$(TAGS) *.[ch]
 
-dumpfile: dumpfile.c
+utils/dumpfile: utils/dumpfile.c
 
 fail.o: fail.c
 
@@ -31,8 +31,8 @@ interface.o: interface.c interface.h types.h constants.h events.o
 events.o: events.c gpointer-structs.h cpu.h interface.h types.h macros.h
 	$(CC) events.c -o events.o -c $(CFLAGS) $(GTKFLAGS)
 
-badge/badgedata.h: dumpfile badge/badge.png
-	./dumpfile badge/badge.png badge/badgedata.h
+badge/badgedata.h: utils/dumpfile badge/badge.png
+	utils/dumpfile badge/badge.png badge/badgedata.h
 
 badge.o: badge.c badge.h constants.h macros.h badge/badgedata.h
 	$(CC) badge.c -o badge.o -c $(CFLAGS) $(GTKFLAGS) $(CAIROFLAGS)
