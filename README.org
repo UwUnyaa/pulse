@@ -17,7 +17,8 @@ projects in it.
   root)
 
 * Building
-1. ensure a C compiler and GTK+2 headers are installed
+1. ensure a C compiler and GTK+2 headers are installed (pango and cairo should
+   be included if it's a new enough version of GTK+2)
 2. clone this repository
 3. run =make=
 
