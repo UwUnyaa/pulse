@@ -19,8 +19,8 @@
 
 #define ignore(thing) (void) (thing)
 
-#define min(a, b) ((a < b) ? a : b)
-#define max(a, b) ((a < b) ? b : a)
+#define min(a, b) ((a < b) ? (a) : (b))
+#define max(a, b) ((a < b) ? (b) : (a))
 #define clamp(n, low, high) min(max(low, n), high)
 
 #define lengthof(x) (sizeof (x) / sizeof (x[0]))
