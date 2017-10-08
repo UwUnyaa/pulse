@@ -23,4 +23,4 @@
 #define max(a, b) ((a < b) ? b : a)
 #define clamp(n, low, high) min(max(low, n), high)
 
-#define lengthof(x) ((sizeof (x) / sizeof (x[0])))
+#define lengthof(x) (sizeof (x) / sizeof (x[0]))
