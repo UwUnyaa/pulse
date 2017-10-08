@@ -10,7 +10,7 @@ TAGS       = etags
 all: pulse
 
 clean:
-	rm -f *~ *.o TAGS pulse
+	rm -f *~ *.o TAGS pulse badge/badgedata.h
 
 tags: *.c *.h
 	$(TAGS) *.[ch]
