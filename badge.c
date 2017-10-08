@@ -18,6 +18,7 @@
 */
 
 #include <stdio.h>
+#include <string.h>             /* memcpy() */
 #include <pango/pangocairo.h>
 #include <gdk/gdk.h>
 #include <gtk/gtk.h>
@@ -25,13 +26,28 @@
 
 #include "constants.h"
 #include "badge.h"
-
+#include "macros.h"
 
 /* cpu.c */
 int getCpuinfoField (char *field, char *result, size_t len);
 
 /* vendor.c */
 void normalizeVendorName (char *name, size_t len);
+
+static cairo_status_t readPNGData (void *closure, unsigned char *buffer,
+                                   unsigned int length) {
+  ignore(closure);
+  static unsigned char *pos = cpuTemplate;
+
+  if (pos + length > cpuTemplate + lengthof (cpuTemplate)) {
+    return CAIRO_STATUS_READ_ERROR;
+  }
+
+  memcpy(buffer, pos, length);
+  pos += length;
+
+  return CAIRO_STATUS_SUCCESS;
+}
 
 static void drawBadgeText (cairo_t *cr, char *label,
                            int ypos, int fontSize) {
@@ -63,7 +79,7 @@ GtkWidget* createBadgeImage (GdkDrawable *drawable) {
   cairo_t *cr = gdk_cairo_create(pixmap);
 
   cairo_surface_t
-    *pngSurface = cairo_image_surface_create_from_png(BadgeTemplate);
+    *pngSurface = cairo_image_surface_create_from_png_stream(readPNGData, 0);
   cairo_set_source_surface(cr, pngSurface, 0, 0);
   cairo_rectangle(cr, 0, 0, BadgeSize, BadgeSize);
   cairo_paint(cr);
@@ -72,7 +88,7 @@ GtkWidget* createBadgeImage (GdkDrawable *drawable) {
   cairo_set_source_rgb(cr, BadgeTextRed, BadgeTextGreen, BadgeTextBlue);
 
   char line[BUFSIZE];
-  
+
   getCpuinfoField("vendor_id", line, sizeof (line));
   normalizeVendorName(line, sizeof (line));
   drawBadgeText(cr, line, 8, 20);

@@ -19,8 +19,11 @@
 
 #define BadgeSize     128
 #define BadgeMargin   8
-#define BadgeTemplate "badge/badge.png"
 
 #define BadgeTextRed   0.89453125
 #define BadgeTextGreen 0.89453125
 #define BadgeTextBlue  0.89453125
+
+static unsigned char cpuTemplate[] = {
+#include "badge/badgedata.h"
+};

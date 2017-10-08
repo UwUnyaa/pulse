@@ -34,7 +34,7 @@ events.o: events.c gpointer-structs.h cpu.h interface.h types.h macros.h
 badge/badgedata.h: dumpfile badge/badge.png
 	./dumpfile badge/badge.png badge/badgedata.h
 
-badge.o: badge.c badge.h constants.h
+badge.o: badge.c badge.h constants.h macros.h badge/badgedata.h
 	$(CC) badge.c -o badge.o -c $(CFLAGS) $(GTKFLAGS) $(CAIROFLAGS)
 
 main.o: main.c types.h interface.h cpu.h gpointer-structs.h config.h
