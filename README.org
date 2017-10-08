@@ -4,8 +4,6 @@
 This is an (unfinished) attempt to port the pulse utility to systems using the
 Linux kernel.
 
-At this point, there is just a placeholder in place of the CPU badge.
-
 It's written in C, and GTK+2, which should be the only things it requires to
 compile. It's my exercise to get more familiar with C and writing larger
 projects in it.
