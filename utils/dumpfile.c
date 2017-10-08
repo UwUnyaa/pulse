@@ -36,13 +36,13 @@ int main (int argc, char *argv[]) {
   }
 
   for (;;) {
-    unsigned int byte = (unsigned int) fgetc(input);
+    unsigned char byte = fgetc(input);
 
     if (feof(input)) {
       break;
     }
 
-    fprintf(output, "%u,", byte);
+    fprintf(output, "%hhu,", byte);
   }
 
   fclose(input);
