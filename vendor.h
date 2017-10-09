@@ -23,7 +23,7 @@ struct vendorName {
 };
 
 /* https://en.wikipedia.org/wiki/CPUID#EAX.3D0:_Get_vendor_ID_.28including_EAX.3D1:_Get_CPUID.29 */
-const struct vendorName vendorNames[] = {
+static const struct vendorName vendorNames[] = {
   {"AMDisbetter!", "AMD"},
   {"AuthenticAMD", "AMD"},
   {"CentaurHauls", "Centaur"},

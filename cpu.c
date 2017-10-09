@@ -217,7 +217,7 @@ double getCPUUsage (struct ProcessorInfo *info) {
 }
 
 
-void initStat (struct ProcessorStat *stat) {
+static void initStat (struct ProcessorStat *stat) {
   stat->user       = 0;
   stat->nice       = 0;
   stat->system     = 0;
@@ -230,7 +230,7 @@ void initStat (struct ProcessorStat *stat) {
   stat->guest_nice = 0;
 }
 
-void initInfo (struct ProcessorInfo *processor, CPUCount_t nthCPU) {
+static void initInfo (struct ProcessorInfo *processor, CPUCount_t nthCPU) {
   processor->enabled = getCPUEnableState(nthCPU);
   processor->usage = 0;
   initStat(&processor->previousStat);
