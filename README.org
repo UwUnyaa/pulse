@@ -3,8 +3,8 @@
 
 [[file:screenshots/example.png][screenshot of pulse]]
 
-This is an (unfinished) attempt to port the pulse utility to systems using the
-Linux kernel.
+This is an attempt to port the pulse utility from BeOS / Haiku to systems
+using the Linux kernel.
 
 It's written in C, and GTK+2, which should be the only things it requires to
 compile. It's my exercise to get more familiar with C and writing larger
