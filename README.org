@@ -1,6 +1,8 @@
 #+TITLE: Pulse — a port of the BeOS / Haiku CPU monitor to Linux
 #+LANGUAGE: en
 
+[[file:screenshots/example.png][screenshot of pulse]]
+
 This is an (unfinished) attempt to port the pulse utility to systems using the
 Linux kernel.
 
