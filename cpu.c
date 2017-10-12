@@ -80,6 +80,22 @@ int getCpuinfoField (char *field, char *result, size_t len) {
   return 1;
 }
 
+long getCPUMaxFrequency (void) {
+  FILE *file =
+    fopen("/sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_max_freq", "r");
+  char line[BUFSIZE];
+  if (!file) {
+    fail("getCPUMaxFrequency(); couldn't open file with max CPU frequency");
+  }
+
+  char *fgetsResult = fgets(line, sizeof (line), file);
+  if (!fgetsResult) {
+    fail("getCPUMaxFrequency(): fgets() failed");
+  }
+
+  return atol(line);
+}
+
 bool getCPUEnableState (CPUCount_t nthCPU) {
   if (nthCPU == 0) {     /* cpu 0 can't be disabled */
     return true;

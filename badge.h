@@ -27,3 +27,7 @@
 static unsigned char cpuTemplate[] = {
 #include "badge/badgedata.h"
 };
+
+static char *cpuFrequencyPowers[] = {
+  "k", "M", "G", "T",
+};

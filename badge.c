@@ -30,6 +30,7 @@
 
 /* cpu.c */
 int getCpuinfoField (char *field, char *result, size_t len);
+long getCPUMaxFrequency (void);
 
 /* vendor.c */
 void normalizeVendorName (char *name, size_t len);
@@ -47,6 +48,23 @@ static cairo_status_t readPNGData (void *closure, unsigned char *buffer,
   pos += length;
 
   return CAIRO_STATUS_SUCCESS;
+}
+
+static void normalizeCPUFrequency (long frequency, char *buf) {
+  unsigned int powers = 0;
+  double result = frequency;
+
+  while (result > 1000) {
+    result /= 1000;
+    powers += 1;
+  }
+
+  if (powers > lengthof (cpuFrequencyPowers)) {
+    result = frequency;
+    powers = 0;
+  }
+
+  sprintf(buf, "%#.2f %sHz", result, cpuFrequencyPowers[powers]);
 }
 
 static void drawBadgeText (cairo_t *cr, char *label,
@@ -95,6 +113,9 @@ GtkWidget* createBadgeImage (GdkDrawable *drawable) {
 
   getCpuinfoField("model name", line, sizeof (line));
   drawBadgeText(cr, line, 40, 8);
+
+  normalizeCPUFrequency(getCPUMaxFrequency(), line);
+  drawBadgeText(cr, line, 108, 8);
 
   cairo_destroy(cr);
 
