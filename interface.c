@@ -22,6 +22,7 @@
 #include "interface-types.h"
 #include "types.h"
 #include "constants.h"
+#include "config.h"
 
 #include "badge.h"
 
