@@ -18,3 +18,6 @@
 */
 
 #define refreshInterval 1000
+
+#define borderSize  4
+#define windowLabel "Pulse"
