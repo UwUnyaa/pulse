@@ -17,4 +17,17 @@
   pulse. If not, see <http://www.gnu.org/licenses/>.
 */
 
-GtkWidget* initInterface (struct CPUInterface *interfaces, CPUCount_t CPUCount);
+#define BadgeSize     128
+#define BadgeMargin   8
+
+#define BadgeTextRed   0.89453125
+#define BadgeTextGreen 0.89453125
+#define BadgeTextBlue  0.89453125
+
+static unsigned char cpuTemplate[] = {
+#include "badge/badgedata.h"
+};
+
+static char *cpuFrequencyPowers[] = {
+  "k", "M", "G", "T",
+};

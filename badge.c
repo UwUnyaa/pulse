@@ -25,15 +25,11 @@
 #include <stddef.h>
 
 #include "constants.h"
-#include "badge.h"
+#include "badge-constants.h"
 #include "macros.h"
 
-/* cpu.c */
-int getCpuinfoField (char *field, char *result, size_t len);
-long getCPUMaxFrequency (void);
-
-/* vendor.c */
-void normalizeVendorName (char *name, size_t len);
+#include "cpu.h"
+#include "vendor.h"
 
 static cairo_status_t readPNGData (void *closure, unsigned char *buffer,
                                    unsigned int length) {

@@ -19,12 +19,11 @@
 
 #include <gtk/gtk.h>
 
-#include "interface.h"
+#include "interface-types.h"
 #include "types.h"
 #include "constants.h"
 
-/* badge.c */
-GtkWidget* createBadgeImage (GdkDrawable*);
+#include "badge.h"
 
 GtkWidget* initInterface (struct CPUInterface *interfaces, CPUCount_t CPUCount) {
   /* INTERFACES should be malloc()ed */

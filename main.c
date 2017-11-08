@@ -21,29 +21,16 @@
 #include <stdlib.h>
 
 #include "types.h"
-#include "interface.h"
-#include "cpu.h"
+#include "interface-types.h"
+#include "cpu-types.h"
 #include "gpointer-structs.h"
 #include "config.h"
 
-/* cpu.c */
-CPUCount_t getCPUCount (void);
-void initInfos (struct ProcessorInfo*, CPUCount_t);
-void getCPUStats (struct ProcessorInfo*, CPUCount_t);
-
-/* interface.c */
-GtkWidget* initInterface (struct CPUInterface*, CPUCount_t);
-
-/* events.c */
-gint updateUsage (gpointer);
-void toggleHandler (GtkWidget*, struct CPUEnableInfo*);
-void lockToggle (GtkWidget*, bool*);
-
-/* fail.c */
-void fail(char*);
-
-/* system.c */
-bool userIsRoot (void);
+#include "cpu.h"
+#include "interface.h"
+#include "events.h"
+#include "fail.h"
+#include "system.h"
 
 int main (int argc, char *argv[]) {
   gtk_init(&argc, &argv);
@@ -105,10 +92,9 @@ int main (int argc, char *argv[]) {
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON (interfaces[i].toggle),
                                  (gboolean) info[i].enabled);
   }
-
   /* add event handlers */
   g_signal_connect(window, "delete-event", G_CALLBACK (gtk_main_quit), 0);
-  g_timeout_add(refreshInterval, updateUsage, &CPUData);
+  g_timeout_add(refreshInterval, (GSourceFunc) updateUsage, &CPUData);
 
   gtk_main();
   return 0;

@@ -21,16 +21,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "interface.h"
+#include "interface-types.h"
 #include "types.h"
-#include "cpu.h"
+#include "cpu-types.h"
 #include "gpointer-structs.h"
 #include "macros.h"
 
-/* cpu.c */
-void getCPUStats (struct ProcessorInfo*, CPUCount_t);
-double getCPUUsage (struct ProcessorInfo*);
-bool setCPUEnableState (bool, struct ProcessorInfo*, CPUCount_t);
+#include "cpu.h"
 
 void lockToggle (GtkWidget *button, bool *state) {
   gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON (button),

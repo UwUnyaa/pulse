@@ -17,29 +17,18 @@
   pulse. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#define CPUStatFile          "/proc/stat"
-#define CPUSysInfoDirFormat  "/sys/devices/system/cpu/cpu%u"
-#define CPUEnabledFileFormat "/sys/devices/system/cpu/cpu%u/online"
-#define CPUinfoFile          "/proc/cpuinfo"
+#include <stdbool.h>
 
-#define MAXCORES             256
+#include "cpu-types.h"
+#include "types.h"
 
-struct ProcessorStat {
-  unsigned long user;
-  unsigned long nice;
-  unsigned long system;
-  unsigned long idle;
-  unsigned long iowait;
-  unsigned long irq;
-  unsigned long softirq;
-  unsigned long steal;
-  unsigned long guest;
-  unsigned long guest_nice;
-};
-
-struct ProcessorInfo {
-  struct ProcessorStat previousStat;
-  struct ProcessorStat currentStat;
-  bool enabled;
-  double usage;
-};
+CPUCount_t getCPUCount (void);
+int getCpuinfoField (char *field, char *result, size_t len);
+long getCPUMaxFrequency (void);
+bool getCPUEnableState (CPUCount_t nthCPU);
+bool setCPUEnableState (bool state,
+                        struct ProcessorInfo *info,
+                        CPUCount_t nthCPU);
+void getCPUStats (struct ProcessorInfo *info, CPUCount_t count);
+double getCPUUsage (struct ProcessorInfo *info);
+void initInfos (struct ProcessorInfo *stat, CPUCount_t count);

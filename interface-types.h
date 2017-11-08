@@ -17,4 +17,10 @@
   pulse. If not, see <http://www.gnu.org/licenses/>.
 */
 
-GtkWidget* initInterface (struct CPUInterface *interfaces, CPUCount_t CPUCount);
+#define borderSize  4
+#define windowLabel "Pulse"
+
+struct CPUInterface {
+  GtkWidget *toggle;
+  GtkWidget *usageBar;
+};

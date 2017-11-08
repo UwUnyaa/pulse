@@ -17,4 +17,6 @@
   pulse. If not, see <http://www.gnu.org/licenses/>.
 */
 
-GtkWidget* initInterface (struct CPUInterface *interfaces, CPUCount_t CPUCount);
+void lockToggle (GtkWidget *button, bool *state);
+void toggleHandler (GtkWidget *button, struct CPUEnableInfo *data);
+gint updateUsage (struct CPUStatsAndInterface *data);

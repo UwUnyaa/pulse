@@ -17,4 +17,5 @@
   pulse. If not, see <http://www.gnu.org/licenses/>.
 */
 
-GtkWidget* initInterface (struct CPUInterface *interfaces, CPUCount_t CPUCount);
+bool directoryExists (char *dirname);
+bool userIsRoot (void);

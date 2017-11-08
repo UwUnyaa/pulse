@@ -21,7 +21,7 @@
 #include <string.h>
 
 #include "macros.h"
-#include "vendor.h"
+#include "vendor-constants.h"
 
 void normalizeVendorName (char *name, size_t len) {
   for (size_t i = 0; i < lengthof (vendorNames); i += 1) {

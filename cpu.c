@@ -24,14 +24,10 @@
 
 #include "types.h"
 #include "constants.h"
-#include "cpu.h"
+#include "cpu-types.h"
 
-/* fail.c */
-void fail(char*);
-
-/* system.c */
-bool directoryExists (char*);
-bool userIsRoot (void);
+#include "fail.h"
+#include "system.h"
 
 CPUCount_t getCPUCount (void) {
   CPUCount_t count = 1;

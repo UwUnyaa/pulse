@@ -17,31 +17,4 @@
   pulse. If not, see <http://www.gnu.org/licenses/>.
 */
 
-struct vendorName {
-  char *cpuid;
-  char *name;
-};
-
-/* https://en.wikipedia.org/wiki/CPUID#EAX.3D0:_Get_vendor_ID_.28including_EAX.3D1:_Get_CPUID.29 */
-static const struct vendorName vendorNames[] = {
-  {"AMDisbetter!", "AMD"},
-  {"AuthenticAMD", "AMD"},
-  {"CentaurHauls", "Centaur"},
-  {"CyrixInstead", "Cyrix"},
-  {"GenuineIntel", "Intel"},
-  {"TransmetaCPU", "Transmeta"},
-  {"GenuineTMx86", "Transmeta"},
-  {"Geode by NSC", "National Semiconductor"},
-  {"NexGenDriven", "NexGen"},
-  {"RiseRiseRise", "Rise"},
-  {"SiS SiS SiS ", "SiS"},
-  {"UMC UMC UMC ", "UMC"},
-  {"VIA VIA VIA ", "VIA"},
-  {"Vortex86 SoC", "Vortex"},
-  {"bhyve bhyve ", "bhyve"},
-  {"KVMKVMKVM",    "KVM"},
-  {"Microsoft Hv", "Hyper-V"},
-  {" lrpepyh vr",  "Parallels"},
-  {"VMwareVMware", "VMware"},
-  {"XenVMMXenVMM", "Xen HVM"},
-};
+void normalizeVendorName (char *name, size_t len);

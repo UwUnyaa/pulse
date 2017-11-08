@@ -21,23 +21,23 @@ fail.o: fail.c
 
 system.o: system.c
 
-cpu.o: cpu.c cpu.h types.h constants.h
+cpu.o: cpu.c cpu-types.h types.h constants.h
 
-vendor.o: vendor.c vendor.h macros.h
+vendor.o: vendor.c vendor-constants.h macros.h
 
-interface.o: interface.c interface.h types.h constants.h events.o
+interface.o: interface.c interface-types.h types.h constants.h events.o
 	$(CC) interface.c -o interface.o -c $(CFLAGS) $(GTKFLAGS)
 
-events.o: events.c gpointer-structs.h cpu.h interface.h types.h macros.h
+events.o: events.c gpointer-structs.h cpu-types.h interface-types.h types.h macros.h
 	$(CC) events.c -o events.o -c $(CFLAGS) $(GTKFLAGS)
 
 badge/badgedata.h: utils/dumpfile badge/badge.png
 	utils/dumpfile badge/badge.png badge/badgedata.h
 
-badge.o: badge.c badge.h constants.h macros.h badge/badgedata.h
+badge.o: badge.c badge-constants.h constants.h macros.h badge/badgedata.h
 	$(CC) badge.c -o badge.o -c $(CFLAGS) $(GTKFLAGS) $(CAIROFLAGS)
 
-main.o: main.c types.h interface.h cpu.h gpointer-structs.h config.h
+main.o: main.c types.h interface-types.h cpu-types.h gpointer-structs.h config.h
 	$(CC) main.c -o main.o -c $(CFLAGS) $(GTKFLAGS)
 
 pulse: main.o events.o interface.o cpu.o system.o fail.o vendor.o badge.o
