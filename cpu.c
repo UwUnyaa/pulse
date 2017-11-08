@@ -232,7 +232,6 @@ double getCPUUsage (struct ProcessorInfo *info) {
   return usage;
 }
 
-
 static void initStat (struct ProcessorStat *stat) {
   stat->user       = 0;
   stat->nice       = 0;
