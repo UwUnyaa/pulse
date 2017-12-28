@@ -68,6 +68,8 @@ int getCpuinfoField (char *field, char *result, size_t len) {
     sscanf(line, "%4096[^\t]%*[\t: ]%4096[^\n]", fieldName, fieldVal);
   } while (strcmp(field, fieldName) != 0 || (isEof = feof(file)));
 
+  fclose(file);
+  
   if (isEof) {
     return 0;
   }
