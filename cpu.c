@@ -83,7 +83,7 @@ long getCPUMaxFrequency (void) {
     fopen("/sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_max_freq", "r");
   char line[BUFSIZE];
   if (!file) {
-    fail("getCPUMaxFrequency(); couldn't open file with max CPU frequency");
+    fail("getCPUMaxFrequency(): couldn't open file with max CPU frequency");
   }
 
   char *fgetsResult = fgets(line, sizeof (line), file);
