@@ -100,10 +100,6 @@ long getCPUMaxFrequency (void) {
 }
 
 bool getCPUEnableState (CPUCount_t nthCPU) {
-  if (nthCPU == 0) {     /* cpu 0 can't be disabled */
-    return true;
-  }
-
   if (nthCPU >= MAXCORES) {
     fail("getCPUEnableState(): argument out of range");
   }
@@ -113,7 +109,9 @@ bool getCPUEnableState (CPUCount_t nthCPU) {
 
   FILE *file = fopen(fileName, "r");
   if (!file) {
-    fail("getCPUEnableState(): couldn't open file");
+    printf("getCPUEnableState(): couldn't open file %s\n", fileName);
+    /* assume that CPU is enabled if it has no online file in sysfs */
+    return true;
   }
 
   bool result = fgetc(file) == '1';
