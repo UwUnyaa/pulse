@@ -1,5 +1,5 @@
 /*
-  Copyright 2017 DoMiNeLa10
+  Copyright 2017-2019 DoMiNeLa10
 
   This file is part of pulse.
 
