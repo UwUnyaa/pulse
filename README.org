@@ -3,6 +3,10 @@
 
 [[file:screenshots/example.png][file:screenshots/example.png]]
 
+Works on non-x86 architectures (even ones that don't support disabling CPUs).
+
+[[file:screenshots/example-arm.png]]
+
 This is an attempt to port the pulse utility from BeOS / Haiku to systems
 using the Linux kernel.
 
