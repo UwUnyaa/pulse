@@ -124,10 +124,6 @@ bool setCPUEnableState (bool state,
                         struct ProcessorInfo *info,
                         CPUCount_t nthCPU) {
   /* Returns true if write succeeded. Updates the info struct. */
-  if (nthCPU == 0) {
-    return false;
-  }
-
   char fileName[BUFSIZE];
   sprintf(fileName, CPUEnabledFileFormat, nthCPU);
 
