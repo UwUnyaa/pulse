@@ -1,5 +1,5 @@
 /*
-  Copyright 2017-2019 DoMiNeLa10
+  Copyright 2017-2020 UwUnyaa
 
   This file is part of pulse.
 
