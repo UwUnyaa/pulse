@@ -84,6 +84,12 @@ int getCpuinfoField (char *field, char *result, size_t len) {
 }
 
 long getCPUMaxFrequency (void) {
+  /* FIXME: get CPU frequency some other way */
+  /* WSL kernels don't expose cpufreq. */
+  if (isWSL()) {
+    return 0;
+  }
+
   FILE *file =
     fopen("/sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_max_freq", "r");
   char line[BUFSIZE];

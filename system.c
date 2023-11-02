@@ -28,6 +28,16 @@ bool directoryExists (char *dirname) {
   return (error != -1 && S_ISDIR(statResult.st_mode));
 }
 
+bool fileExists (char *filename) {
+  struct stat statResult;
+  int error = stat(filename, &statResult);
+  return error == 0;
+}
+
+bool isWSL (void) {
+  return fileExists("/proc/sys/fs/binfmt_misc/WSLInterop");
+}
+
 bool userIsRoot (void) {
   return getuid() == 0;
 }

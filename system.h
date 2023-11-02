@@ -18,4 +18,6 @@
 */
 
 bool directoryExists (char *dirname);
+bool fileExists (char *filename);
+bool isWSL (void);
 bool userIsRoot (void);
