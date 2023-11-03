@@ -37,6 +37,7 @@ int main (int argc, char *argv[]) {
 
   CPUCount_t CPUCount = getCPUCount();
   bool isRoot = userIsRoot();
+  bool isWSL = systemIsWSL();
 
   struct CPUInterface *interfaces =
     malloc(sizeof (struct CPUInterface) * CPUCount);
@@ -75,7 +76,7 @@ int main (int argc, char *argv[]) {
   /* bind callbacks to toggles */
   g_signal_connect(interfaces[0].toggle, "toggled",
                    G_CALLBACK (lockToggle), &info[0].enabled);
-  if (isRoot) {
+  if (isRoot && !isWSL) {    /* writing to online files in WSL does nothing */
     for (CPUCount_t i = 1; i < CPUCount; i += 1) {
       g_signal_connect(interfaces[i].toggle, "toggled",
                        G_CALLBACK (toggleHandler), &callbackData[i]);
