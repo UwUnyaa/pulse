@@ -51,24 +51,24 @@ GtkWidget* initInterface (struct CPUInterface *interfaces, CPUCount_t CPUCount) 
   gtk_widget_show(image);
 
   GtkWidget *CPUsVbox = gtk_vbox_new(TRUE, (2 * borderSize));
-  gtk_box_pack_start(GTK_BOX (topHbox), CPUsVbox, FALSE, FALSE, borderSize);
+  gtk_box_pack_start(GTK_BOX (topHbox), CPUsVbox, TRUE, TRUE, borderSize);
   gtk_widget_show(CPUsVbox);
 
-  char CPULabel[BUFSIZE];
   for (CPUCount_t i = 0; i < CPUCount; i += 1) {
+    char CPULabel[BUFSIZE];
     sprintf(CPULabel, "%u", i);
 
     struct CPUInterface *current = &interfaces[i];
     GtkWidget *hbox = gtk_hbox_new(FALSE, borderSize);
 
-    gtk_box_pack_start(GTK_BOX (CPUsVbox), hbox, FALSE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX (CPUsVbox), hbox, FALSE, TRUE, 0);
 
     current->toggle = gtk_toggle_button_new_with_label(CPULabel);
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON (current->toggle), TRUE);
     current->usageBar = gtk_progress_bar_new();
     gtk_progress_bar_update(GTK_PROGRESS_BAR (current->usageBar), 0);
 
-    gtk_box_pack_start(GTK_BOX (hbox), current->toggle, TRUE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX (hbox), current->toggle, FALSE, FALSE, 0);
     gtk_box_pack_start(GTK_BOX (hbox), current->usageBar, TRUE, TRUE, 0);
 
     gtk_widget_show(hbox);
