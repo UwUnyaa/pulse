@@ -19,5 +19,5 @@
 
 bool directoryExists (char *dirname);
 bool fileExists (char *filename);
-bool isWSL (void);
+bool systemIsWSL (void);
 bool userIsRoot (void);

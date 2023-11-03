@@ -87,7 +87,7 @@ int getCpuinfoField (char *field, char *result, size_t len) {
 long getCPUMaxFrequency (void) {
   /* FIXME: get CPU frequency some other way */
   /* WSL kernels don't expose cpufreq. */
-  if (isWSL()) {
+  if (systemIsWSL()) {
     return 0;
   }
 

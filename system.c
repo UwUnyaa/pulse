@@ -34,7 +34,7 @@ bool fileExists (char *filename) {
   return error == 0;
 }
 
-bool isWSL (void) {
+bool systemIsWSL (void) {
   return fileExists("/proc/sys/fs/binfmt_misc/WSLInterop");
 }
 
