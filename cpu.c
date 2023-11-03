@@ -118,7 +118,11 @@ bool getCPUEnableState (CPUCount_t nthCPU) {
 
   FILE *file = fopen(fileName, "r");
   if (!file) {
-    printf("getCPUEnableState(): couldn't open file %s\n", fileName);
+    if (nthCPU != 0) {
+      /* it's likely that 0th CPU can't be disabled, especially on x86 */
+      printf("getCPUEnableState(): couldn't open file %s\n", fileName);
+    }
+
     /* assume that CPU is enabled if it has no online file in sysfs */
     return true;
   }
