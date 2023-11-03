@@ -67,6 +67,7 @@ int getCpuinfoField (char *field, char *result, size_t len) {
     }
 
     if (!fgetsResult) {
+      fclose(file);
       fail("getCpuinfoField(): fgets() failed");
     }
 
@@ -99,9 +100,11 @@ long getCPUMaxFrequency (void) {
 
   char *fgetsResult = fgets(line, sizeof (line), file);
   if (!fgetsResult) {
+    fclose(file);
     fail("getCPUMaxFrequency(): fgets() failed");
   }
 
+  fclose(file);
   return atol(line);
 }
 
@@ -140,6 +143,7 @@ bool setCPUEnableState (bool state,
 
   int result = fputs((state ? "1" : "0"), file);
   if (result == EOF) {
+    fclose(file);
     return false;
   }
 
@@ -158,6 +162,7 @@ void getCPUStats (struct ProcessorInfo *info, CPUCount_t count) {
   /* skip the first line — it's irrelevant */
   char *fgetsResult = fgets(buf, sizeof (buf), statFile);
   if (!fgetsResult) {
+    fclose(statFile);
     fail("getCPUStats(): fgets() failed");
   }
 
@@ -167,6 +172,7 @@ void getCPUStats (struct ProcessorInfo *info, CPUCount_t count) {
 
     char *result = fgets(buf, sizeof (buf), statFile);
     if (!result) {
+      fclose(statFile);
       fail("getCPUStats(): fgets() failed");
     }
 
@@ -197,6 +203,7 @@ void getCPUStats (struct ProcessorInfo *info, CPUCount_t count) {
            &temp,
            sizeof (struct ProcessorStat));
   }
+
   fclose(statFile);
 }
 
