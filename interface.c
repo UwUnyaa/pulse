@@ -43,13 +43,6 @@ GtkWidget* initInterface (struct CPUInterface *interfaces, CPUCount_t CPUCount) 
                      FALSE, FALSE, borderSize);
   gtk_widget_show(imageAlignment);
 
-  /* show window first, in order to make it drawable */
-  gtk_widget_show(window);
-  /* no clue what I'm doing, but this compiles */
-  GtkWidget *image = createBadgeImage(window->window);
-  gtk_container_add(GTK_CONTAINER (imageAlignment), image);
-  gtk_widget_show(image);
-
   GtkWidget *CPUsVbox = gtk_vbox_new(TRUE, (2 * borderSize));
   gtk_box_pack_start(GTK_BOX (topHbox), CPUsVbox, TRUE, TRUE, borderSize);
   gtk_widget_show(CPUsVbox);
@@ -77,6 +70,14 @@ GtkWidget* initInterface (struct CPUInterface *interfaces, CPUCount_t CPUCount) 
   }
 
   gtk_widget_show(CPUsVbox);
+
+  /* draw the badge as the last thing, to avoid showing a blank window */
+  /* show window first, in order to make it drawable */
+  gtk_widget_show(window);
+  /* no clue what I'm doing, but this compiles */
+  GtkWidget *image = createBadgeImage(window->window);
+  gtk_container_add(GTK_CONTAINER (imageAlignment), image);
+  gtk_widget_show(image);
 
   return window;
 }
