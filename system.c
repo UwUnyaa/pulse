@@ -52,6 +52,7 @@ long wslGetMaxCPUFrequency (void) {
 
   char *fgetsResult = fgets(buffer, sizeof (buffer), shell);
   if (!fgetsResult) {
+    pclose(shell);
     fail("wslGetMaxFrequency(): fgets() failed");
   }
 
