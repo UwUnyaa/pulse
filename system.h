@@ -20,4 +20,5 @@
 bool directoryExists (char *dirname);
 bool fileExists (char *filename);
 bool systemIsWSL (void);
+long wslGetMaxCPUFrequency (void);
 bool userIsRoot (void);

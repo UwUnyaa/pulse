@@ -17,10 +17,15 @@
   pulse. If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include <stdio.h>
+#include <stdlib.h>
 #include <stdbool.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
+
+#include "constants.h"
+#include "fail.h"
 
 bool directoryExists (char *dirname) {
   struct stat statResult;
@@ -36,6 +41,23 @@ bool fileExists (char *filename) {
 
 bool systemIsWSL (void) {
   return fileExists("/proc/sys/fs/binfmt_misc/WSLInterop");
+}
+
+long wslGetMaxCPUFrequency (void) {
+  char buffer[BUFSIZE];
+  FILE *shell = popen("powershell.exe -c \"echo (Get-CimInstance CIM_Processor).MaxClockSpeed\"", "r");
+  if (!shell) {
+    fail("wslGetMaxFrequency(): popen() failed");
+  }
+
+  char *fgetsResult = fgets(buffer, sizeof (buffer), shell);
+  if (!fgetsResult) {
+    fail("wslGetMaxFrequency(): fgets() failed");
+  }
+
+  long frequency = atol(buffer) * 1000; /* number is in MHz, normalize */
+  pclose(shell);
+  return frequency;
 }
 
 bool userIsRoot (void) {

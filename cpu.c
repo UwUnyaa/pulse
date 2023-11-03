@@ -88,7 +88,7 @@ long getCPUMaxFrequency (void) {
   /* FIXME: get CPU frequency some other way */
   /* WSL kernels don't expose cpufreq. */
   if (systemIsWSL()) {
-    return 0;
+    return wslGetMaxCPUFrequency();
   }
 
   FILE *file =
